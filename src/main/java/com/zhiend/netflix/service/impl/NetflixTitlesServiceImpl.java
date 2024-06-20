@@ -11,6 +11,7 @@ import com.zhiend.netflix.service.INetflixTitlesService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhiend.netflix.vo.AddDateCountVO;
 import com.zhiend.netflix.vo.CountryCountVO;
+import com.zhiend.netflix.vo.ReleaseYearCountVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,11 @@ public class NetflixTitlesServiceImpl extends ServiceImpl<NetflixTitlesMapper, N
     @Override
     public List<AddDateCountVO> getTopAddDates() {
         return netflixTitlesMapper.countByAddDate();
+    }
+
+    @Override
+    public List<ReleaseYearCountVO> getTopReleaseYears() {
+        return netflixTitlesMapper.countByReleaseYear();
     }
 
 }

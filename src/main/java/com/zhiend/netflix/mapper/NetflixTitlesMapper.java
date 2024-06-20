@@ -5,6 +5,7 @@ import com.zhiend.netflix.entity.NetflixTitles;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zhiend.netflix.vo.AddDateCountVO;
 import com.zhiend.netflix.vo.CountryCountVO;
+import com.zhiend.netflix.vo.ReleaseYearCountVO;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -30,4 +31,7 @@ public interface NetflixTitlesMapper extends BaseMapper<NetflixTitles> {
 
     @Select("SELECT DATE_FORMAT(date_added, '%Y-%m') as addDate, COUNT(*) as count FROM netflix_titles GROUP BY addDate ORDER BY count DESC LIMIT 10")
     List<AddDateCountVO> countByAddDate();
+
+    @Select("SELECT release_year as releaseYear, COUNT(*) as count FROM netflix_titles GROUP BY releaseYear ORDER BY count DESC LIMIT 10")
+    List<ReleaseYearCountVO> countByReleaseYear();
 }

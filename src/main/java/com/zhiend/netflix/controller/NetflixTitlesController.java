@@ -10,6 +10,7 @@ import com.zhiend.netflix.result.Result;
 import com.zhiend.netflix.service.INetflixTitlesService;
 import com.zhiend.netflix.vo.AddDateCountVO;
 import com.zhiend.netflix.vo.CountryCountVO;
+import com.zhiend.netflix.vo.ReleaseYearCountVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -155,4 +156,10 @@ public class NetflixTitlesController {
     }
 
 
+    @ApiOperation("获取前10名发行年份统计数据")
+    @GetMapping("/top-release-years")
+    public Result<List<ReleaseYearCountVO>> getTopReleaseYears() {
+        List<ReleaseYearCountVO> topReleaseYears = netflixTitlesService.getTopReleaseYears();
+        return Result.success(topReleaseYears);
+    }
 }
