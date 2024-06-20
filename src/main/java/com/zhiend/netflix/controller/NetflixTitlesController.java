@@ -1,6 +1,7 @@
 package com.zhiend.netflix.controller;
 
 
+import com.zhiend.netflix.dto.DirectorCountDTO;
 import com.zhiend.netflix.dto.NetflixTitlesAddDTO;
 import com.zhiend.netflix.dto.NetflixTitlesUpdateDTO;
 import com.zhiend.netflix.entity.BackPage;
@@ -111,6 +112,13 @@ public class NetflixTitlesController {
     public Result countByType(@RequestParam String type) {
         int count = netflixTitlesService.countByType(type);
         return Result.success(count);
+    }
+
+    //可以前端固定为10个导演显示
+    @GetMapping("/count-by-director")
+    public Result countByDirector() {
+        List<DirectorCountDTO> directorCounts = netflixTitlesService.countByDirector();
+        return Result.success(directorCounts);
     }
 
 

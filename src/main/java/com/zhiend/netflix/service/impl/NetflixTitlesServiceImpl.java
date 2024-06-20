@@ -3,6 +3,7 @@ package com.zhiend.netflix.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.zhiend.netflix.dto.DirectorCountDTO;
 import com.zhiend.netflix.entity.BackPage;
 import com.zhiend.netflix.entity.NetflixTitles;
 import com.zhiend.netflix.mapper.NetflixTitlesMapper;
@@ -10,6 +11,8 @@ import com.zhiend.netflix.service.INetflixTitlesService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -46,6 +49,11 @@ public class NetflixTitlesServiceImpl extends ServiceImpl<NetflixTitlesMapper, N
     @Override
     public int countByType(String type) {
         return netflixTitlesMapper.selectCountByType(type);
+    }
+
+    @Override
+    public List<DirectorCountDTO> countByDirector() {
+        return netflixTitlesMapper.selectCountByDirector();
     }
 
 }

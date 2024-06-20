@@ -1,8 +1,11 @@
 package com.zhiend.netflix.service;
 
+import com.zhiend.netflix.dto.DirectorCountDTO;
 import com.zhiend.netflix.entity.BackPage;
 import com.zhiend.netflix.entity.NetflixTitles;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +20,6 @@ public interface INetflixTitlesService extends IService<NetflixTitles> {
     BackPage<NetflixTitles> queryPage(Long pageNo, Long pageSize);
 
     int countByType(String type);
+
+    List<DirectorCountDTO> countByDirector();
 }
