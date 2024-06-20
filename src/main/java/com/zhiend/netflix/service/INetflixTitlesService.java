@@ -4,6 +4,7 @@ import com.zhiend.netflix.dto.DirectorCountDTO;
 import com.zhiend.netflix.entity.BackPage;
 import com.zhiend.netflix.entity.NetflixTitles;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zhiend.netflix.vo.AddDateCountVO;
 import com.zhiend.netflix.vo.CountryCountVO;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface INetflixTitlesService extends IService<NetflixTitles> {
     List<DirectorCountDTO> countByDirector();
 
     List<CountryCountVO> countByCountry();
+
+    List<AddDateCountVO> getTopAddDates();
 }

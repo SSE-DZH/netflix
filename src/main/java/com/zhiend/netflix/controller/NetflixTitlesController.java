@@ -8,6 +8,7 @@ import com.zhiend.netflix.entity.BackPage;
 import com.zhiend.netflix.entity.NetflixTitles;
 import com.zhiend.netflix.result.Result;
 import com.zhiend.netflix.service.INetflixTitlesService;
+import com.zhiend.netflix.vo.AddDateCountVO;
 import com.zhiend.netflix.vo.CountryCountVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -65,7 +66,7 @@ public class NetflixTitlesController {
         }
     }
 
-    @ApiOperation("分页查询Netflix影视")
+    @ApiOperation("删除影视信息")
     @DeleteMapping("/delete/{showId}")
     public Result deleteNetflixTitle(@PathVariable Long showId) {
         boolean result = netflixTitlesService.removeById(showId);
@@ -78,15 +79,11 @@ public class NetflixTitlesController {
 
     @ApiOperation("更新Netflix影视")
     @PutMapping("/update")
-    public Result updateNetflixTitle(@RequestBody @Valid NetflixTitlesUpdateDTO netflixTitlesDTO, BindingResult bindingResult) {
+    public Result updateNetflixTitle(@RequestBody @Valid NetflixTitles netflixTitles, BindingResult bindingResult) {
         // 校验参数
         if (bindingResult.hasErrors()) {
             return Result.error(bindingResult.getAllErrors().get(0).getDefaultMessage());
         }
-
-        // 将DTO转换为实体对象
-        NetflixTitles netflixTitles = new NetflixTitles();
-        BeanUtils.copyProperties(netflixTitlesDTO, netflixTitles);
 
         // 执行更新操作
         boolean result = netflixTitlesService.updateById(netflixTitles);
@@ -96,6 +93,7 @@ public class NetflixTitlesController {
             return Result.error("更新失败");
         }
     }
+
 
 
     @ApiOperation("根据ID查询Netflix影视")
@@ -147,6 +145,13 @@ public class NetflixTitlesController {
     public Result<List<CountryCountVO>> countByCountry() {
         List<CountryCountVO> countryCounts = netflixTitlesService.countByCountry();
         return Result.success(countryCounts);
+    }
+
+    @ApiOperation("获取前10名添加日期统计数据")
+    @GetMapping("/top-add-dates")
+    public Result<List<AddDateCountVO>> getTopAddDates() {
+        List<AddDateCountVO> topAddDates = netflixTitlesService.getTopAddDates();
+        return Result.success(topAddDates);
     }
 
 

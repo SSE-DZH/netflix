@@ -9,6 +9,7 @@ import com.zhiend.netflix.entity.NetflixTitles;
 import com.zhiend.netflix.mapper.NetflixTitlesMapper;
 import com.zhiend.netflix.service.INetflixTitlesService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zhiend.netflix.vo.AddDateCountVO;
 import com.zhiend.netflix.vo.CountryCountVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,11 @@ public class NetflixTitlesServiceImpl extends ServiceImpl<NetflixTitlesMapper, N
     @Override
     public List<CountryCountVO> countByCountry() {
         return netflixTitlesMapper.countByCountry();
+    }
+
+    @Override
+    public List<AddDateCountVO> getTopAddDates() {
+        return netflixTitlesMapper.countByAddDate();
     }
 
 }
