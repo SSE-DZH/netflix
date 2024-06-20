@@ -8,6 +8,7 @@ import com.zhiend.netflix.entity.BackPage;
 import com.zhiend.netflix.entity.NetflixTitles;
 import com.zhiend.netflix.result.Result;
 import com.zhiend.netflix.service.INetflixTitlesService;
+import com.zhiend.netflix.vo.CountryCountVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -119,6 +120,12 @@ public class NetflixTitlesController {
     public Result countByDirector() {
         List<DirectorCountDTO> directorCounts = netflixTitlesService.countByDirector();
         return Result.success(directorCounts);
+    }
+
+    @GetMapping("/count-by-country")
+    public Result<List<CountryCountVO>> countByCountry() {
+        List<CountryCountVO> countryCounts = netflixTitlesService.countByCountry();
+        return Result.success(countryCounts);
     }
 
 
