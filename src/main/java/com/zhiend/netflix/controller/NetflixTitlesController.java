@@ -9,6 +9,9 @@ import com.zhiend.netflix.entity.NetflixTitles;
 import com.zhiend.netflix.result.Result;
 import com.zhiend.netflix.service.INetflixTitlesService;
 import com.zhiend.netflix.vo.CountryCountVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -27,10 +30,21 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/netflix-titles")
+@CrossOrigin("*")
+@Api(tags = "奈飞数据统计")
+@Slf4j
 public class NetflixTitlesController {
     @Autowired
     private INetflixTitlesService netflixTitlesService;
 
+    /**
+     * 通过POST请求添加Netflix标题。
+     *
+     * @param netflixTitlesDTO 添加请求的数据传输对象，包含要添加的Netflix标题的信息。
+     * @param bindingResult 用于存储验证netflixTitlesDTO过程中产生的错误信息。
+     * @return 如果添加成功，返回一个成功的Result对象；如果添加失败或验证失败，返回一个包含错误信息的Result对象。
+     */
+    @ApiOperation("添加Netflix影视")
     @PostMapping("/add")
     public Result addNetflixTitle(@RequestBody @Valid NetflixTitlesAddDTO netflixTitlesDTO, BindingResult bindingResult) {
         // 校验参数
@@ -51,7 +65,7 @@ public class NetflixTitlesController {
         }
     }
 
-
+    @ApiOperation("分页查询Netflix影视")
     @DeleteMapping("/delete/{showId}")
     public Result deleteNetflixTitle(@PathVariable Long showId) {
         boolean result = netflixTitlesService.removeById(showId);
@@ -62,6 +76,7 @@ public class NetflixTitlesController {
         }
     }
 
+    @ApiOperation("更新Netflix影视")
     @PutMapping("/update")
     public Result updateNetflixTitle(@RequestBody @Valid NetflixTitlesUpdateDTO netflixTitlesDTO, BindingResult bindingResult) {
         // 校验参数
@@ -83,6 +98,7 @@ public class NetflixTitlesController {
     }
 
 
+    @ApiOperation("根据ID查询Netflix影视")
     @GetMapping("/get/{showId}")
     public Result getNetflixTitle(@PathVariable Long showId) {
         NetflixTitles netflixTitles = netflixTitlesService.getById(showId);
@@ -93,6 +109,7 @@ public class NetflixTitlesController {
         }
     }
 
+    @ApiOperation("查询所有Netflix影视")
     @GetMapping("/list")
     public Result listNetflixTitles() {
         List<NetflixTitles> netflixTitlesList = netflixTitlesService.list();
@@ -100,15 +117,17 @@ public class NetflixTitlesController {
     }
 
     /**
-     * 获取所有用户信息
-     * @return 所有用户信息
+     * 获取所有分页影视信息
+     * @return 所有分页影视信息
      */
+    @ApiOperation("获取所有分页影视信息")
     @GetMapping("/getAllPages")
     public BackPage<NetflixTitles> queryPage(@RequestParam("pageNo") Long pageNo, @RequestParam("pageSize") Long pageSize) {
         return netflixTitlesService.queryPage(pageNo, pageSize);
     }
 
 
+    @ApiOperation("根据类型统计影视数量")
     @GetMapping("/count-by-type")
     public Result countByType(@RequestParam String type) {
         int count = netflixTitlesService.countByType(type);
@@ -116,12 +135,14 @@ public class NetflixTitlesController {
     }
 
     //可以前端固定为10个导演显示
+    @ApiOperation("根据导演统计影视数量")
     @GetMapping("/count-by-director")
     public Result countByDirector() {
         List<DirectorCountDTO> directorCounts = netflixTitlesService.countByDirector();
         return Result.success(directorCounts);
     }
 
+    @ApiOperation("根据国家/地区统计影视数量")
     @GetMapping("/count-by-country")
     public Result<List<CountryCountVO>> countByCountry() {
         List<CountryCountVO> countryCounts = netflixTitlesService.countByCountry();
