@@ -15,6 +15,7 @@ import com.zhiend.netflix.vo.ReleaseYearCountVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -73,5 +74,11 @@ public class NetflixTitlesServiceImpl extends ServiceImpl<NetflixTitlesMapper, N
     public List<ReleaseYearCountVO> getTopReleaseYears() {
         return netflixTitlesMapper.countByReleaseYear();
     }
+
+    @Override
+    public List<String> getAllTypes() {
+        return netflixTitlesMapper.getAllTypes();
+    }
+
 
 }

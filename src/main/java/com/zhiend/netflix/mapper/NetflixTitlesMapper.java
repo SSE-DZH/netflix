@@ -34,4 +34,7 @@ public interface NetflixTitlesMapper extends BaseMapper<NetflixTitles> {
 
     @Select("SELECT release_year as releaseYear, COUNT(*) as count FROM netflix_titles GROUP BY releaseYear ORDER BY count DESC LIMIT 10")
     List<ReleaseYearCountVO> countByReleaseYear();
+
+    @Select("SELECT DISTINCT type FROM netflix_titles")
+    List<String> getAllTypes();
 }

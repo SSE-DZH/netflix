@@ -108,7 +108,7 @@ public class NetflixTitlesController {
         }
     }
 
-    @ApiOperation("查询所有Netflix影视")
+    @ApiOperation("查询所有Netflix影视（这个不写了）")
     @GetMapping("/list")
     public Result listNetflixTitles() {
         List<NetflixTitles> netflixTitlesList = netflixTitlesService.list();
@@ -121,10 +121,17 @@ public class NetflixTitlesController {
      */
     @ApiOperation("获取所有分页影视信息")
     @GetMapping("/getAllPages")
-    public BackPage<NetflixTitles> queryPage(@RequestParam("pageNo") Long pageNo, @RequestParam("pageSize") Long pageSize) {
-        return netflixTitlesService.queryPage(pageNo, pageSize);
+    public Result queryPage(@RequestParam("pageNo") Long pageNo, @RequestParam("pageSize") Long pageSize) {
+        return Result.success(netflixTitlesService.queryPage(pageNo, pageSize));
     }
 
+    //返回所有影视的类型
+    @ApiOperation("获取所有影视类型")
+    @GetMapping("/get-all-types")
+    public Result getAllTypes() {
+        List<String> types = netflixTitlesService.getAllTypes();
+        return Result.success(types);
+    }
 
     @ApiOperation("根据类型统计影视数量")
     @GetMapping("/count-by-type")

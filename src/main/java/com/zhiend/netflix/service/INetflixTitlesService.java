@@ -31,4 +31,6 @@ public interface INetflixTitlesService extends IService<NetflixTitles> {
     List<AddDateCountVO> getTopAddDates();
 
     List<ReleaseYearCountVO> getTopReleaseYears();
+
+    List<String> getAllTypes();
 }
