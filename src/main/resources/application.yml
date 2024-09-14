@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/netflix_titles?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/netflix_titles?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: root
 
@@ -32,8 +32,8 @@ server:
 knife4j:
   enable: true
   openapi:
-    title: 学生管理接口文档
-    description: "学生管理接口文档"
+    title: 奈飞影视系统接口文档
+    description: "奈飞影视系统接口文档"
     email: sse_d@qq.com
     concat: zhiend
     url: http://localhost:10086/doc.html
